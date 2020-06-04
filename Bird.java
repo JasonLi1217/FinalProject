@@ -25,16 +25,16 @@ class Bird extends Rectangle{
 		return birdWidth;
 	}
 	public void jump(){
-		if(y - v_y*10 <= 0){
+		if(y - v_y*20 <= 0){
 			y = 0;
 		}
 		else{
-			y -= v_y*10;
+			y -= v_y*20;
 		}
 	}
 	public void fall(){
 		if(y + v_y >= FlappyBird.HEIGHT-birdWidth){
-			y = FlappyBird.HEIGHT-birdWidth*2;
+			y = FlappyBird.HEIGHT-birdWidth;
 		}
 		else{
 			y += v_y;
