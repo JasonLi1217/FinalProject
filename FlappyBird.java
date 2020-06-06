@@ -17,6 +17,9 @@ class FlappyBird implements KeyListener, ActionListener{
 	public static final int WIDTH = 600, HEIGHT = 900;
 	public MyPanel panel;
 	public Bird bird;
+	public ArrayList<Column> columns;
+	public Random rand;
+	
 	public final BufferedImage img = ImageIO.read(new File("background.png"));
 	
 	public FlappyBird()throws IOException{
@@ -24,6 +27,8 @@ class FlappyBird implements KeyListener, ActionListener{
 		JFrame frame = new JFrame("FlappyBird");
 		panel = new MyPanel();
 		Timer timer = new Timer(20, this);
+		
+		rand = new Random();
 
 		frame.add(panel);
 		frame.pack();
@@ -34,13 +39,32 @@ class FlappyBird implements KeyListener, ActionListener{
 		
 		frame.addKeyListener(this);
 		bird = new Bird(25);
+		columns = new ArrayList<Column>();
+		
+		addColumn(true);
+		addColumn(true);
+		addColumn(true);
+		addColumn(true);
+		addColumn(true);
+		addColumn(true);
+		addColumn(true);
+		addColumn(true);
 		
 		timer.start();
 
 	} 
 	public void actionPerformed(ActionEvent e){
+		int speed = 20;
+		
+		for (int i = 0; i < columns.size(); i++){
+			Column column = columns.get(i);
+
+			column.x -= speed;
+		}
+		
 		panel.repaint();
 	}
+	
 	public void keyPressed( KeyEvent e )   {
 	}
 
@@ -60,6 +84,31 @@ class FlappyBird implements KeyListener, ActionListener{
 		g.setColor(Color.ORANGE);
 		g.fillRect(bird.X()-bird.size(), bird.Y(), bird.size(), bird.size());
 		
+		for (Column column : columns)
+		{
+			paintColumn(g, column);
+		}
+		
+	}
+	
+	public void addColumn(boolean start){
+		int gap = 250;
+		int width = 100;
+		int height = 50 + rand.nextInt(300);
+		
+		if (start){
+			columns.add(new Column(WIDTH + width +columns.size()*300, HEIGHT-height, width, height));
+			columns.add(new Column(WIDTH + width +(columns.size()-1)*300,0, width, HEIGHT-height-gap));
+		}else{
+			columns.add(new Column(columns.get(columns.size() - 1).x + 600, HEIGHT - height, width, height));
+			columns.add(new Column(columns.get(columns.size() - 1).x, 0, width, HEIGHT - height - gap));
+		}
+			
+	}
+	
+	public void paintColumn(Graphics g, Column column){
+		g.setColor(Color.GREEN.darker());
+		g.fillRect(column.x, column.y, column.width, column.height);
 	}
 	
 	
