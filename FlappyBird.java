@@ -9,6 +9,9 @@ import java.awt.event.*;
 import java.io.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.util.ArrayList;
+import java.util.Random;
+
 
 class FlappyBird implements KeyListener, ActionListener{
 	
@@ -54,7 +57,7 @@ class FlappyBird implements KeyListener, ActionListener{
 
 	} 
 	public void actionPerformed(ActionEvent e){
-		int speed = 20;
+		int speed = 10;
 		
 		for (int i = 0; i < columns.size(); i++){
 			Column column = columns.get(i);
@@ -94,7 +97,7 @@ class FlappyBird implements KeyListener, ActionListener{
 	public void addColumn(boolean start){
 		int gap = 250;
 		int width = 100;
-		int height = 50 + rand.nextInt(300);
+		int height = rand.nextInt(450)+50;
 		
 		if (start){
 			columns.add(new Column(WIDTH + width +columns.size()*300, HEIGHT-height, width, height));
