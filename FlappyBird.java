@@ -17,7 +17,7 @@ class FlappyBird implements KeyListener, ActionListener{
 	
 	public static FlappyBird flappybird;
 	
-	public static final int WIDTH = 600, HEIGHT = 900;
+	public static final int WIDTH = 1300, HEIGHT = 700;
 	public MyPanel panel;
 	public Bird bird;
 	public ArrayList<Column> columns;
@@ -80,14 +80,14 @@ class FlappyBird implements KeyListener, ActionListener{
 	public void keyTyped( KeyEvent e )  {}
 	
 	public void repaint(Graphics g){
-		g.drawImage(img, 0, 0, null);
-
+		g.drawImage(img, 0, -200, null);
+		g.drawImage(img, 760, -200, null);
 		bird.fall();
 
 		g.setColor(Color.ORANGE);
 		g.fillRect(bird.X()-bird.size(), bird.Y(), bird.size(), bird.size());
 		
-		for (Column column : columns)
+		for (Column column: columns)
 		{
 			paintColumn(g, column);
 		}
@@ -95,7 +95,7 @@ class FlappyBird implements KeyListener, ActionListener{
 	}
 	
 	public void addColumn(boolean start){
-		int gap = 250;
+		int gap = 200;
 		int width = 100;
 		int height = rand.nextInt(450)+50;
 		
@@ -121,9 +121,3 @@ class FlappyBird implements KeyListener, ActionListener{
 
   
 }
-
-
-
-
-
-
