@@ -3,7 +3,7 @@ import java.awt.*;
 
 class Column extends Rectangle{
 	
-	public ArrayList<Column> columns;
+	//public ArrayList<Column> columns;
 	
 	public Column(int x, int y, int height, int width){
 		super(x,y,height,width);
