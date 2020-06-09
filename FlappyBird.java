@@ -18,10 +18,13 @@ class FlappyBird implements KeyListener, ActionListener{
 	public static FlappyBird flappybird;
 	
 	public static final int WIDTH = 1300, HEIGHT = 700;
+	public static int ticks, birdSpeed;
+	
 	public MyPanel panel;
 	public Bird bird;
 	public ArrayList<Column> columns;
 	public Random rand;
+
 	
 	public final BufferedImage img = ImageIO.read(new File("background.png"));
 	
@@ -44,19 +47,24 @@ class FlappyBird implements KeyListener, ActionListener{
 		bird = new Bird(25);
 		columns = new ArrayList<Column>();
 		
-		addColumn(true);
-		addColumn(true);
-		addColumn(true);
-		addColumn(true);
-		addColumn(true);
-		addColumn(true);
-		addColumn(true);
-		addColumn(true);
+		for (int i=0; i<100; i++){
+			addColumn(true);
+		}
+		
 		
 		timer.start();
 
 	} 
 	public void actionPerformed(ActionEvent e){
+		//bird
+		ticks++;
+		
+		if(ticks%2==0 && birdSpeed<15){
+			birdSpeed += 2;
+		}
+		
+		bird.y += birdSpeed;
+		//columns
 		int speed = 10;
 		
 		for (int i = 0; i < columns.size(); i++){
@@ -74,7 +82,6 @@ class FlappyBird implements KeyListener, ActionListener{
 	public void keyReleased( KeyEvent e ){
 		if(e.getKeyCode()==32){
 			bird.jump(); 
-			
 		}
 	}
 	public void keyTyped( KeyEvent e )  {}
@@ -82,7 +89,6 @@ class FlappyBird implements KeyListener, ActionListener{
 	public void repaint(Graphics g){
 		g.drawImage(img, 0, -200, null);
 		g.drawImage(img, 760, -200, null);
-		bird.fall();
 
 		g.setColor(Color.ORANGE);
 		g.fillRect(bird.X()-bird.size(), bird.Y(), bird.size(), bird.size());
