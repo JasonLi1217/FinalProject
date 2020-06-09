@@ -103,7 +103,7 @@ class FlappyBird implements KeyListener, ActionListener{
 	public void addColumn(boolean start){
 		int gap = 200;
 		int width = 100;
-		int height = rand.nextInt(450)+50;
+		int height = rand.nextInt(350)+50;
 		
 		if (start){
 			columns.add(new Column(WIDTH + width +columns.size()*300, HEIGHT-height, width, height));
