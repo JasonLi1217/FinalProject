@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 class FlappyBird extends JPanel implements KeyListener, ActionListener{
 	
-	public Image background;
+	public static Image background;
 	static Timer timer;
 	
 	public FlappyBird() {
