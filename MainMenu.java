@@ -12,20 +12,30 @@ class MainMenu extends JPanel implements ActionListener{
 	
 	public MainMenu(){
 		timer = new Timer(20, this);
-		setLayout(new FlowLayout(FlowLayout.CENTER));
+		setLayout(null);
 		
 		//load icons
 		play = new JButton(loadAndResizeImg("play.png",190, 57));
+		shop = new JButton(loadAndResizeImg("shop.png",190, 57));
+		help = new JButton(loadAndResizeImg("help.png",190, 57));
+		
+		play.setBounds(Game.WIDTH/2-95,200, 190, 57);
+		shop.setBounds(Game.WIDTH/2-95,300, 190, 57);
+		help.setBounds(Game.WIDTH/2-95,400, 190, 57);
 		
 		add(play);
+		add(shop);
+		add(help);
+		
 		play.addActionListener(this);
+		shop.addActionListener(this);
+		help.addActionListener(this);
 		
 		timer.start();
 	}
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource() == play){
 			Game.card.show(Game.c, "FlappyBird");
-			timer.stop();
 			FlappyBird.timer.start();
 		}
 		if(e.getSource() == timer){
@@ -33,11 +43,15 @@ class MainMenu extends JPanel implements ActionListener{
 		}
 	}
 	public void paintComponent(Graphics g){
-		super.paintComponent(g);
-		
+		super.paintComponent(g);		
 		g.drawImage(FlappyBird.background, 0, -200, null);
 		g.drawImage(FlappyBird.background, 760, -200, null);
 		
+		//welcome
+		Font f = new Font("Monospaced", Font.BOLD, 65);
+		g.setFont(f);
+		g.setColor(Color.WHITE);
+		g.drawString("FlappyBird 2.0", Game.WIDTH/2-250, 100);
 	}
 	
 	//this method allows to resize out icons for the buttons
