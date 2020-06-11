@@ -21,6 +21,8 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 		background = img.getImage();
 		
 		bird = new Bird(55, 36);
+		tube1 = new TopTube(500,400);
+		tube2 = new BottomTube(500,400);
 		timer = new Timer(20, this);
 		
 		goBack = new JButton(MainMenu.loadAndResizeImg("return.png",190, 57));
@@ -58,6 +60,9 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 
 		//bird
 		g.drawImage(bird.getImage(), bird.getX(), bird.getY(), null);
+		//tubes
+		g.drawImage(tube1.getImage(), tube1.getX(), tube1.getY(), null);
+		g.drawImage(tube2.getImage(), tube2.getX(), tube2.getY(), null);
 	}
 	//Mouse Actions
 	public void mouseClicked(MouseEvent e){
