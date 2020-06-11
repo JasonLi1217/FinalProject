@@ -37,10 +37,11 @@ class MainMenu extends JPanel implements ActionListener{
 		
 		g.drawImage(FlappyBird.background, 0, -200, null);
 		g.drawImage(FlappyBird.background, 760, -200, null);
+		
 	}
 	
 	//this method allows to resize out icons for the buttons
-	public ImageIcon loadAndResizeImg(String path, int width, int height){
+	public static ImageIcon loadAndResizeImg(String path, int width, int height){
 		ImageIcon img = new ImageIcon(path);
 		Image image = img.getImage();
 		Image modifiedImage = image.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
