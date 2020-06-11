@@ -12,6 +12,8 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 	static Timer timer;
 	
 	private Bird bird;
+	private TopTube tube1;
+	private BottomTube tube2;
 	private JButton goBack;
 	
 	public FlappyBird() {
