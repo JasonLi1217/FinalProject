@@ -12,18 +12,32 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 	static Timer timer;
 	
 	private Bird bird;
+	private JButton goBack;
 	
 	public FlappyBird() {
 		//load image
+		setLayout(null);
 		ImageIcon img = new ImageIcon ("background.png");
 		background = img.getImage();
+		
 		bird = new Bird(55, 36);
 		timer = new Timer(20, this);
+		
+		goBack = new JButton(MainMenu.loadAndResizeImg("return.png",190, 57));
+		goBack.setBounds(5,5, 190, 57);
+		add(goBack);
+		goBack.addActionListener(this);
 		
 		addMouseListener(this);
 	}
 	public void actionPerformed(ActionEvent e){
 		time++;
+		//return
+		if(e.getSource()==goBack){
+			timer.stop();
+			Game.card.show(Game.c, "menu");
+		}
+		
 		if (time>30){ //gives small pause before game starts
 			if(time%2==0 && birdSpeed<15){
 				birdSpeed += 2;
