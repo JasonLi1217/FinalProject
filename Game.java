@@ -19,9 +19,13 @@ class Game extends JFrame{
 		
 		MainMenu menu = new MainMenu();
 		FlappyBird flappy = new FlappyBird();
+		Help help = new Help();
+		Shop shop = new Shop();
 		
 		c.add("menu", menu);
 		c.add("FlappyBird", flappy);
+		c.add("Help", help);
+		c.add("Shop", shop);
 		
 	}
 	
