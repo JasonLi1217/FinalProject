@@ -38,6 +38,12 @@ class MainMenu extends JPanel implements ActionListener{
 			Game.card.show(Game.c, "FlappyBird");
 			FlappyBird.timer.start();
 		}
+		if(e.getSource() == help){
+			Game.card.show(Game.c, "Help");
+		}
+		if(e.getSource() == shop){
+			Game.card.show(Game.c, "Shop");
+		}
 		if(e.getSource() == timer){
 			repaint();
 		}
