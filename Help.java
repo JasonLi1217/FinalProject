@@ -6,10 +6,14 @@ class Help extends JPanel implements ActionListener{
 	
 	public Timer timer;
 	private JButton goBack;
+	private Image leftClick;
 	
 	public Help(){
 		timer = new Timer(20, this);
 		setLayout(null);
+		
+		ImageIcon ii = new ImageIcon("leftclick.png");
+		leftClick = ii.getImage();
 		
 		goBack = new JButton(MainMenu.loadAndResizeImg("return.png",190, 57));
 		goBack.setBounds(5,5, 190, 57);
@@ -23,12 +27,21 @@ class Help extends JPanel implements ActionListener{
 			timer.stop();
 			Game.card.show(Game.c, "menu");
 		}
+		
 		repaint();
 	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);		
 		g.drawImage(FlappyBird.background, 0, -200, null);
 		g.drawImage(FlappyBird.background, 760, -200, null);
+		
+		Font f = new Font("Monospaced", Font.BOLD, 32);
+		g.setFont(f);
+		g.setColor(Color.WHITE);
+		g.drawString("Left click to jump", Game.WIDTH/8, 300);
+		
+		g.drawImage(leftClick, Game.WIDTH/6+50, 400, null);
+		g.drawImage(Bird.birdSprite,Game.WIDTH/6+80, 100, null);
 		
 	}
 
