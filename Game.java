@@ -11,6 +11,7 @@ class Game extends JFrame{
 	static final int WIDTH = 1350, HEIGHT = 700;
 	static Container c;
 	static CardLayout card;
+	static FlappyBird flappy ;
 	
 	public Game(){
 		c = getContentPane();
@@ -18,7 +19,7 @@ class Game extends JFrame{
 		c.setLayout(card);
 		
 		MainMenu menu = new MainMenu();
-		FlappyBird flappy = new FlappyBird();
+		flappy = new FlappyBird();
 		Help help = new Help();
 		Shop shop = new Shop();
 		
@@ -26,7 +27,6 @@ class Game extends JFrame{
 		c.add("FlappyBird", flappy);
 		c.add("Help", help);
 		c.add("Shop", shop);
-		
 	}
 	
 	public static void main(String[] args){
@@ -35,7 +35,7 @@ class Game extends JFrame{
 		game.setTitle("FlappyBird 2.0");
 		game.setSize(WIDTH, HEIGHT);
 		game.setVisible(true);
-		game.setResizable(false);
+		game.setResizable(true);
 		game.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		
