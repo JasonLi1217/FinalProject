@@ -1,19 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
+
 
 class FlappyBird extends JPanel implements ActionListener, MouseListener{
 	
 	static Image background;
-	static int birdSpeed, time;
+	static int birdSpeed,time,tubeSpeed,score;
 	static Timer timer;
 	
 	private Bird bird;
-	private TopTube tube1;
-	private BottomTube tube2;
+	private Tubes tubes1, tubes2, tubes3;
 	private JButton goBack;
 	
 	public FlappyBird() {
@@ -23,8 +20,9 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 		background = img.getImage();
 		
 		bird = new Bird(55, 36);
-		tube1 = new TopTube(500,400);
-		tube2 = new BottomTube(500,400);
+		tubes1 = new Tubes(100,400, Game.WIDTH/2 + 300);
+		tubes2 = new Tubes(100,400, Game.WIDTH + 300);
+		tubes3 = new Tubes(100,400, Game.WIDTH+Game.WIDTH/2+ 300);
 		timer = new Timer(20, this);
 		
 		goBack = new JButton(MainMenu.loadAndResizeImg("return.png",190, 57));
@@ -36,12 +34,15 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 	}
 	public void actionPerformed(ActionEvent e){
 		time++;
+		tubeSpeed = 10;
 		//return
 		if(e.getSource()==goBack){
 			timer.stop();
+			reset();
 			Game.card.show(Game.c, "menu");
 		}
 		
+		//bird
 		if (time>30){ //gives small pause before game starts
 			if(time%2==0 && birdSpeed<15){
 				birdSpeed += 2;
@@ -51,7 +52,23 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 				bird.y = Game.HEIGHT-bird.getHeight()-69;
 			}  
 			bird.y += birdSpeed;
+			
+			//tubes
+			tubes1.setX(tubes1.getX()-tubeSpeed);
+			tubes2.setX(tubes2.getX()-tubeSpeed);
+			tubes3.setX(tubes3.getX()-tubeSpeed);
+			
+			if(tubes1.getX()<= -100){
+				tubes1.setX(Game.WIDTH+Game.WIDTH/2);
+			}
+			if(tubes2.getX()<= -100){
+				tubes2.setX(Game.WIDTH+Game.WIDTH/2);
+			} 
+			if(tubes3.getX()<= -100){
+				tubes3.setX(Game.WIDTH+Game.WIDTH/2);
+			}
 		}
+		
 		repaint();
 	}
 	public void paintComponent(Graphics g){
@@ -63,8 +80,22 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 		//bird
 		g.drawImage(bird.getImage(), bird.getX(), bird.getY(), null);
 		//tubes
-		g.drawImage(tube1.getImage(), tube1.getX(), tube1.getY(), null);
-		g.drawImage(tube2.getImage(), tube2.getX(), tube2.getY(), null);
+		g.drawImage(tubes1.getTopTube(), tubes1.getX(), tubes1.getTopy(), null);
+		g.drawImage(tubes1.getBotTube(), tubes1.getX(), tubes1.getBoty(), null);
+		
+		g.drawImage(tubes2.getTopTube(), tubes2.getX(), tubes2.getTopy(), null);
+		g.drawImage(tubes2.getBotTube(), tubes2.getX(), tubes2.getBoty(), null);  
+		
+		g.drawImage(tubes3.getTopTube(), tubes3.getX(), tubes3.getTopy(), null);
+		g.drawImage(tubes3.getBotTube(), tubes3.getX(), tubes3.getBoty(), null);  
+	}
+	
+	public void reset(){
+		bird.y = Game.HEIGHT/2;
+		tubes1.setX(Game.WIDTH/2 + 300);
+		tubes2.setX(Game.WIDTH + 300);
+		tubes3.setX(Game.WIDTH+Game.WIDTH/2+ 300);
+		
 	}
 	//Mouse Actions
 	public void mouseClicked(MouseEvent e){
