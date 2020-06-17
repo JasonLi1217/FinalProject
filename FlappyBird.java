@@ -20,9 +20,9 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 		background = img.getImage();
 		
 		bird = new Bird(55, 36);
-		tubes1 = new Tubes(100,400, Game.WIDTH/2 + 300);
-		tubes2 = new Tubes(100,400, Game.WIDTH + 300);
-		tubes3 = new Tubes(100,400, Game.WIDTH+Game.WIDTH/2+ 300);
+		tubes1 = new Tubes(100,500, Game.WIDTH/2 + 300);
+		tubes2 = new Tubes(100,500, Game.WIDTH + 300);
+		tubes3 = new Tubes(100,500, Game.WIDTH+Game.WIDTH/2+ 300);
 		timer = new Timer(20, this);
 		
 		goBack = new JButton(MainMenu.loadAndResizeImg("return.png",190, 57));
@@ -60,12 +60,19 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 			
 			if(tubes1.getX()<= -100){
 				tubes1.setX(Game.WIDTH+Game.WIDTH/2);
+				//create new gap height
+				tubes1.setTopy(-(int)(Math.random()*450));
+				tubes1.setBoty(tubes1.getTopy()+500+tubes1.getGap());
 			}
 			if(tubes2.getX()<= -100){
 				tubes2.setX(Game.WIDTH+Game.WIDTH/2);
+				tubes2.setTopy(-(int)(Math.random()*450));
+				tubes2.setBoty(tubes2.getTopy()+500+tubes2.getGap());
 			} 
 			if(tubes3.getX()<= -100){
 				tubes3.setX(Game.WIDTH+Game.WIDTH/2);
+				tubes3.setTopy(-(int)(Math.random()*450));
+				tubes3.setBoty(tubes3.getTopy()+500+tubes3.getGap());
 			}
 		}
 		
