@@ -4,25 +4,28 @@ import java.awt.Image;
 
 class Tubes{
 	public Image topTube, botTube;
-	private int width, height, x, topy, boty;
+	private int width, height, x, topy, boty, gap;
 	
 	public Tubes(int width, int height, int x){
 		ImageIcon tii = MainMenu.loadAndResizeImg("tubedown.png", width, height);
 		topTube = tii.getImage();
 		
-		ImageIcon bii = MainMenu.loadAndResizeImg("tubeup.png", width, height);
+		ImageIcon bii = MainMenu.loadAndResizeImg("tubeup.png", width, height+300);
 		botTube = bii.getImage();
 	
 		this.width = width;
 		this.height = height;
-		
+		gap = 125;
 		this.x = x;
-		topy = -200;
-		boty = Game.HEIGHT/2;
+		topy = -(int)(Math.random()*450);
+		boty = topy+500+gap;
 	
 	}
 	public int getX(){
 		return x;
+	}
+	public int getGap(){
+		return gap;
 	}
 	public void setX(int x){
 		this.x = x;
@@ -32,6 +35,12 @@ class Tubes{
 	}
 	public int getBoty(){
 		return boty;
+	}
+	public void setTopy(int y){
+		this.topy = y;
+	}
+	public void setBoty(int y){
+		this.boty = y;
 	}
 	public int getWidth(){
 		return width;
@@ -45,4 +54,5 @@ class Tubes{
 	public Image getBotTube(){
 		return botTube;
 	}
+	
 }
