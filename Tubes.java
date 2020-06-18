@@ -55,4 +55,12 @@ class Tubes{
 		return botTube;
 	}
 	
+	public Rectangle getBoundsTop() {
+		return new Rectangle(x, topy, width, height);
+	}
+	
+	public Rectangle getBoundsBottom() {
+		return new Rectangle(x, boty, width, height);
+	}
+	
 }
