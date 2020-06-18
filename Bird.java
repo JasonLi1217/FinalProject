@@ -29,6 +29,15 @@ class Bird{
 	public Image getImage(){
 		return birdSprite;
 	}
+	
+	public void setHeight(int height){
+		this.height = height;
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(x, y, width, height);
+	}
+	
 	public void setImage(String path, int width, int height){
 		ImageIcon ii = MainMenu.loadAndResizeImg(path, width, height);
 		birdSprite = ii.getImage();
