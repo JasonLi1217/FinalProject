@@ -2,13 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 
 class Bird{
-	public Image birdSprite;
+	static Image birdSprite;
 	public int x,y;
 	private int width,height;
 	
 	public Bird(int width, int height){//can add Strig path parameter later for customization
-		ImageIcon ii = MainMenu.loadAndResizeImg("bird.png", width, height);
-		birdSprite = ii.getImage();
+		setImage("yellowbird.png", width, height);
 		
 		this.width = width;
 		this.height = height;
@@ -29,6 +28,10 @@ class Bird{
 	}
 	public Image getImage(){
 		return birdSprite;
+	}
+	public void setImage(String path, int width, int height){
+		ImageIcon ii = MainMenu.loadAndResizeImg(path, width, height);
+		birdSprite = ii.getImage();
 	}
 	public void jump(){
 		if (FlappyBird.birdSpeed > 0){
