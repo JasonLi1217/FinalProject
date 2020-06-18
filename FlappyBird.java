@@ -9,7 +9,7 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 	static int birdSpeed,time,tubeSpeed,score;
 	static Timer timer;
 	
-	private Bird bird;
+	public static Bird bird;
 	private Tubes tubes1, tubes2, tubes3;
 	private JButton goBack;
 	private boolean collision = false;
