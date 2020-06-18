@@ -12,6 +12,7 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 	private Bird bird;
 	private Tubes tubes1, tubes2, tubes3;
 	private JButton goBack;
+	private boolean collision = false;
 	
 	public FlappyBird() {
 		//load image
@@ -52,6 +53,7 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 				bird.y = Game.HEIGHT-bird.getHeight()-69;
 			}  
 			bird.y += birdSpeed;
+			checkCollisions();
 			
 			//tubes
 			tubes1.setX(tubes1.getX()-tubeSpeed);
@@ -104,6 +106,27 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 		tubes3.setX(Game.WIDTH+Game.WIDTH/2+ 300);
 		
 	}
+	
+	public void checkCollisions() {
+
+		Rectangle r1 = bird.getBounds();
+		Rectangle r2 = tubes1.getBoundsTop();
+		Rectangle r3 = tubes1.getBoundsBottom();
+		Rectangle r4 = tubes2.getBoundsTop();
+		Rectangle r5 = tubes2.getBoundsBottom();
+		Rectangle r6 = tubes3.getBoundsTop();
+		Rectangle r7 = tubes3.getBoundsBottom();
+
+		if (r1.intersects(r2)||r1.intersects(r3)||r1.intersects(r4)||r1.intersects(r5)||r1.intersects(r6)||r1.intersects(r7)) {
+			collision= true;
+			tubeSpeed = 0;
+			
+		}else{
+			collision = false;
+		}
+		
+	}
+	
 	//Mouse Actions
 	public void mouseClicked(MouseEvent e){
 		bird.jump();
