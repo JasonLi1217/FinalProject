@@ -35,7 +35,7 @@ class Game extends JFrame{
 		game.setTitle("FlappyBird 2.0");
 		game.setSize(WIDTH, HEIGHT);
 		game.setVisible(true);
-		game.setResizable(true);
+		game.setResizable(false);
 		game.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		
