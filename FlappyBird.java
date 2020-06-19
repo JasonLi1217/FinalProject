@@ -8,6 +8,7 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 	static Image background;
 	static int birdSpeed,time,tubeSpeed;
 	static double score = 0.0;
+	static double highScore = 0.0;
 	static Timer timer;
 	
 	public static Bird bird;
@@ -104,11 +105,12 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 		g.drawImage(tubes3.getTopTube(), tubes3.getX(), tubes3.getTopy(), null);
 		g.drawImage(tubes3.getBotTube(), tubes3.getX(), tubes3.getBoty(), null); 
 		
-		g.setColor(Color.ORANGE);
+		g.setColor(Color.WHITE);
 		
 		if(collision){
 			g.setFont(new Font("Monospaced", Font.BOLD, 80));
 			g.drawString("GAME OVER",490,Game.HEIGHT/2);
+			g.drawString("HIGH SCORE: "+(int)highScore,420,450);
 		}
 		g.setFont(new Font("Monospaced", Font.BOLD, 80));
 		g.drawString(""+(int)score,Game.WIDTH/2,Game.HEIGHT/5);
@@ -141,7 +143,6 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 			birdSpeed = 0;
 			tubeSpeed = 0;
 			timer.stop();
-			//reset();
 				
 		}else{
 			collision = false;
@@ -161,6 +162,10 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 			score+=0.5;
 		}else{
 			passThrough = false;
+		}
+		
+		if(score>highScore){
+			highScore = score;
 		}
 		
 	}
