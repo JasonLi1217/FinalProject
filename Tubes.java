@@ -4,7 +4,7 @@ import java.awt.Image;
 
 class Tubes{
 	public Image topTube, botTube;
-	private int width, height, x, topy, boty, gap;
+	private int width, height,x, topy, boty, gap;
 	
 	public Tubes(int width, int height, int x){
 		ImageIcon tii = MainMenu.loadAndResizeImg("tubedown.png", width, height);
@@ -15,15 +15,16 @@ class Tubes{
 	
 		this.width = width;
 		this.height = height;
-		gap = 125;
+		gap = 175;
 		this.x = x;
-		topy = -(int)(Math.random()*450);
+		topy = -(int)(Math.random()*350);
 		boty = topy+500+gap;
 	
 	}
 	public int getX(){
 		return x;
 	}
+	
 	public int getGap(){
 		return gap;
 	}
