@@ -140,7 +140,6 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 			tubeSpeed = 0;
 			birdSpeed = 0;
 			tubeSpeed = 0;
-			bird.setY(bird.y);
 			timer.stop();
 			//reset();
 				
