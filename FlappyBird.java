@@ -25,9 +25,9 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 		background = img.getImage();
 		
 		bird = new Bird(55, 36);
-		tubes1 = new Tubes(100,500, Game.WIDTH/2 + 300);
-		tubes2 = new Tubes(100,500, Game.WIDTH + 300);
-		tubes3 = new Tubes(100,500, Game.WIDTH+Game.WIDTH/2+ 300);
+		tubes1 = new Tubes(100,500, Game.WIDTH + 300);
+		tubes2 = new Tubes(100,500, Game.WIDTH +Game.WIDTH/2+ 300);
+		tubes3 = new Tubes(100,500, Game.WIDTH*2+ 300);
 		timer = new Timer(20, this);
 		
 		goBack = new JButton(MainMenu.loadAndResizeImg("return.png",190, 57));
@@ -120,9 +120,9 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 	
 	public void reset(){
 		bird.y = Game.HEIGHT/2;
-		tubes1.setX(Game.WIDTH/2 + 300);
-		tubes2.setX(Game.WIDTH + 300);
-		tubes3.setX(Game.WIDTH+Game.WIDTH/2+ 300);
+		tubes1.setX(Game.WIDTH+ 300);
+		tubes2.setX(Game.WIDTH +Game.WIDTH/2+ 300);
+		tubes3.setX(Game.WIDTH*2 + 300);
 		
 	}
 	
