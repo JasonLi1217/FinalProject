@@ -16,6 +16,7 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 	private JButton goBack;
 	private boolean collision = false;
 	private boolean passThrough = false;
+	private JButton restart;
 
 	
 	public FlappyBird() {
@@ -23,6 +24,11 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 		setLayout(null);
 		ImageIcon img = new ImageIcon ("background.png");
 		background = img.getImage();
+		
+		restart = new JButton(MainMenu.loadAndResizeImg("restart.png",200, 80));
+		restart.setBounds(10,590, 190, 57);
+		add(restart);
+		restart.addActionListener(this);
 		
 		bird = new Bird(55, 36);
 		tubes1 = new Tubes(100,500, Game.WIDTH + 300);
@@ -45,6 +51,14 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 			timer.stop();
 			reset();
 			Game.card.show(Game.c, "menu");
+			score = 0;
+		}
+		
+		if(e.getSource()==restart){
+			timer.stop();
+			reset();
+			Game.card.show(Game.c, "FlappyBird");
+			FlappyBird.timer.start();
 			score = 0;
 		}
 		
