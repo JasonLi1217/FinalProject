@@ -93,7 +93,7 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 		g.drawImage(background, 760, -200, null);	
 
 		//bird
-		g.drawImage(bird.getImage(), bird.getX(), bird.getY(), null);
+		g.drawImage(bird.birdSprite, bird.getX(), bird.getY(), null);
 		//tubes
 		g.drawImage(tubes1.getTopTube(), tubes1.getX(), tubes1.getTopy(), null);
 		g.drawImage(tubes1.getBotTube(), tubes1.getX(), tubes1.getBoty(), null);
