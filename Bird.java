@@ -26,10 +26,6 @@ class Bird{
 	public int getHeight(){
 		return height;
 	}
-	public Image getImage(){
-		return birdSprite;
-	}
-	
 	public void setHeight(int height){
 		this.height = height;
 	}
