@@ -63,24 +63,42 @@ class Shop extends JPanel implements ActionListener{
 			timer.stop();
 			Game.card.show(Game.c, "menu");
 		}
+		
 		if(e.getSource()==yellow){
 			FlappyBird.bird.setImage("yellowbird.png", 55, 36);
 			selectedX = 134;
 		}
+		
 		if(e.getSource()==red){
-			FlappyBird.bird.setImage("bluebird.png", 55, 36);
-			selectedX = 470;
+			if(FlappyBird.highScore>=5.0){
+				FlappyBird.bird.setImage("bluebird.png", 55, 36);
+				selectedX = 470;
+			}else{
+				FlappyBird.bird.setImage("yellowbird.png", 55, 36);
+			}
 		}
+		
 		if(e.getSource()==blue){
-			FlappyBird.bird.setImage("redbird.png", 55, 36);
-			selectedX = 806;
+			if(FlappyBird.highScore>=10.0){
+				FlappyBird.bird.setImage("redbird.png", 55, 36);
+				selectedX = 806;
+			}else{
+				FlappyBird.bird.setImage("yellowbird.png", 55, 36);
+			}
+			
 		}
+		
 		if(e.getSource()==special){
-			FlappyBird.bird.setImage("specialbird.png", 55, 43);
-			selectedX = 1142;
+			if(FlappyBird.highScore>=20.0){
+				FlappyBird.bird.setImage("specialbird.png", 55, 43);
+				selectedX = 1142;
+			}else{
+				FlappyBird.bird.setImage("yellowbird.png", 55, 36);
+			}
 		}
 		repaint();
 	}
+	
 	public Image loadImage(String path, int width, int height){
 		ImageIcon ii = MainMenu.loadAndResizeImg(path, width, height);
 		Image img = ii.getImage();
