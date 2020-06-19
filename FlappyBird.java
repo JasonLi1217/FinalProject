@@ -6,13 +6,16 @@ import java.awt.event.*;
 class FlappyBird extends JPanel implements ActionListener, MouseListener{
 	
 	static Image background;
-	static int birdSpeed,time,tubeSpeed,score;
+	static int birdSpeed,time,tubeSpeed;
+	static double score = 0.0;
 	static Timer timer;
 	
 	public static Bird bird;
 	private Tubes tubes1, tubes2, tubes3;
 	private JButton goBack;
 	private boolean collision = false;
+	private boolean passThrough = false;
+
 	
 	public FlappyBird() {
 		//load image
@@ -35,12 +38,13 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 	}
 	public void actionPerformed(ActionEvent e){
 		time++;
-		tubeSpeed = 10;
+		tubeSpeed = 5;
 		//return
 		if(e.getSource()==goBack){
 			timer.stop();
 			reset();
 			Game.card.show(Game.c, "menu");
+			score = 0;
 		}
 		
 		//bird
@@ -55,6 +59,8 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 			bird.y += birdSpeed;
 			checkCollisions();
 			
+			checkPassThrough();
+			
 			//tubes
 			tubes1.setX(tubes1.getX()-tubeSpeed);
 			tubes2.setX(tubes2.getX()-tubeSpeed);
@@ -63,17 +69,17 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 			if(tubes1.getX()<= -100){
 				tubes1.setX(Game.WIDTH+Game.WIDTH/2);
 				//create new gap height
-				tubes1.setTopy(-(int)(Math.random()*450));
+				tubes1.setTopy(-(int)(Math.random()*350));
 				tubes1.setBoty(tubes1.getTopy()+500+tubes1.getGap());
 			}
 			if(tubes2.getX()<= -100){
 				tubes2.setX(Game.WIDTH+Game.WIDTH/2);
-				tubes2.setTopy(-(int)(Math.random()*450));
+				tubes2.setTopy(-(int)(Math.random()*350));
 				tubes2.setBoty(tubes2.getTopy()+500+tubes2.getGap());
 			} 
 			if(tubes3.getX()<= -100){
 				tubes3.setX(Game.WIDTH+Game.WIDTH/2);
-				tubes3.setTopy(-(int)(Math.random()*450));
+				tubes3.setTopy(-(int)(Math.random()*350));
 				tubes3.setBoty(tubes3.getTopy()+500+tubes3.getGap());
 			}
 		}
@@ -96,7 +102,18 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 		g.drawImage(tubes2.getBotTube(), tubes2.getX(), tubes2.getBoty(), null);  
 		
 		g.drawImage(tubes3.getTopTube(), tubes3.getX(), tubes3.getTopy(), null);
-		g.drawImage(tubes3.getBotTube(), tubes3.getX(), tubes3.getBoty(), null);  
+		g.drawImage(tubes3.getBotTube(), tubes3.getX(), tubes3.getBoty(), null); 
+		
+		g.setColor(Color.ORANGE);
+		
+		if(collision){
+			g.setFont(new Font("Monospaced", Font.BOLD, 80));
+			g.drawString("GAME OVER",490,Game.HEIGHT/2);
+		}
+		g.setFont(new Font("Monospaced", Font.BOLD, 80));
+		g.drawString(""+(int)score,Game.WIDTH/2,Game.HEIGHT/5);
+		
+		
 	}
 	
 	public void reset(){
@@ -116,13 +133,35 @@ class FlappyBird extends JPanel implements ActionListener, MouseListener{
 		Rectangle r5 = tubes2.getBoundsBottom();
 		Rectangle r6 = tubes3.getBoundsTop();
 		Rectangle r7 = tubes3.getBoundsBottom();
+		Rectangle r8 = new Rectangle(0,Game.HEIGHT-bird.getHeight()-70,0,0);
 
-		if (r1.intersects(r2)||r1.intersects(r3)||r1.intersects(r4)||r1.intersects(r5)||r1.intersects(r6)||r1.intersects(r7)) {
+		if (r1.intersects(r2)||r1.intersects(r3)||r1.intersects(r4)||r1.intersects(r5)||r1.intersects(r6)||r1.intersects(r7)||r1.intersects(r8)) {
 			collision= true;
 			tubeSpeed = 0;
-			
+			birdSpeed = 0;
+			tubeSpeed = 0;
+			bird.setY(bird.y);
+			timer.stop();
+			//reset();
+				
 		}else{
 			collision = false;
+		}
+		
+	}
+	
+	public void checkPassThrough(){
+		if(bird.x > tubes1.getX()+71&& tubes1.getX()+71 > bird.x-10){
+			passThrough = true;
+			score+=0.5;
+		}else if (bird.x > tubes2.getX()+71&& tubes2.getX()+71 > bird.x-10){
+			passThrough = true;
+			score+=0.5;
+		}else if (bird.x > tubes3.getX()+71&& tubes3.getX()+71 > bird.x-10){
+			passThrough = true;
+			score+=0.5;
+		}else{
+			passThrough = false;
 		}
 		
 	}
